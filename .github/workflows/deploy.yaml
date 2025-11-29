@@ -1,0 +1,18 @@
+name: Deploy to EC2
+
+# Trigger the workflow
+on:
+  push:
+    branches:
+      - cicd
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+
+          - name: run a linux command
+            run: ls -la
