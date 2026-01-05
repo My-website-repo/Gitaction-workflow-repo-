@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
+
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -24,4 +25,6 @@ jobs:
 
       - name: Build and push docker image to ECR
         run: |
-          docker build -t portfolio-i .
+          docker build -t portfolio-i:v1 .
+          docker tag portfolio-i:v1 533813050683.dkr.ecr.us-east-1.amazonaws.com/portfolio-i:v1
+          docker push 533813050683.dkr.ecr.us-east-1.amazonaws.com/portfolio-i:v1
