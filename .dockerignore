@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+.github
+
+# Editor / OS files
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Logs & temp files
+*.log
+*.tmp
+
+# Node / package files (in case you add them later)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# CI artifacts
+coverage
+dist
+
+# Docker files themselves (optional but clean)
+Dockerfile
+.dockerignore
