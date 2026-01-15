@@ -1,30 +1,21 @@
-name: ci build and push docker image to ECR
+name: ci  build and push docker image to ECR
 
 on:
   push:
-    branches:
-      - cicd
+    
 
 jobs:
   build-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region us-east-1
+          aws configure set default.region ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
         run: |
-           aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533813050683.dkr.ecr.us-east-1.amazonaws.com
-
-      - name: Build and push docker image to ECR
-        run: |
-          docker build -t portfolio-i:v1 .
-          docker tag portfolio-i:v1 533813050683.dkr.ecr.us-east-1.amazonaws.com/portfolio-i:v1
-          docker push 533813050683.dkr.ecr.us-east-1.amazonaws.com/portfolio-i:v1
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533813050683.dkr.ecr.us-east-1.amazonaws.com
